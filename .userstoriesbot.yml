@@ -1,0 +1,12 @@
+# Showcase fork only (never part of an upstream pull request).
+version: 1
+app:
+  install: "corepack enable && yarn install --immutable && CIRCLE_NODE_TOTAL=2 NEXT_TELEMETRY_DISABLED=1 NODE_ENV=production yarn build:website"
+  start: python3 -m http.server {port} --bind 0.0.0.0 --directory website/out
+  url: http://localhost:{port}
+  readyPath: /
+  readyStatus: 200
+  runtime: node22
+demo:
+  maxVideos: 1
+  beforePass: true
